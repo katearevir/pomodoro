@@ -39,7 +39,7 @@ h1{
     height: 400px;
 }
 
-#playPause{
+#playPause, #restart{
     font-family: 'Dekko';
     font-size: 30px;
     border: none;
