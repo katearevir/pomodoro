@@ -1,8 +1,14 @@
 body{
+    font-family: 'Dekko';
     background-color: beige;
     text-align: center;
 }
 
+h1{
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+}
 .flex-container{
     display: flex;
     flex-wrap: wrap;
@@ -11,7 +17,9 @@ body{
 .timer{
     flex: 0 0 50%;
     display: flex;
+    line-height: 30px;
     flex-direction: column;
+    height: 400px;
     align-items: center;
     justify-content: center;
 }
@@ -19,13 +27,13 @@ body{
 #countdown{
     font-size: 100px;
     border: 5px solid black;
-    width: 70%;
-    padding-top: 70px;
-    padding-bottom: 70px;
+    width: 30%;
+    padding:60px;
 }
 
 .settings{
     display: flex;
+    height: 400px;
     flex: 0 0 50%;
     flex-direction: column;
     align-items: center;
@@ -33,13 +41,19 @@ body{
 }
 
 #playPause{
+    font-family: 'Dekko';
+    font-size: 30px;
     border: none;
-    padding: 12px 30px;
+    padding: 12px 120px;
     border-radius: 4px;
     color: white;
     background-color: darksalmon;
 }
 
 .bear{
+    flex: 0 0 50%;
+}
+
+.playlist{
     flex: 0 0 50%;
 }
