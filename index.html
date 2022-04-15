@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pomodoro</title>
+</head>
+<body>
+    
+    <h1>Pomodoro</h1>
+    <div class="flex-container">
+        
+        <div class="timer">
+            <p id="countdown">00:00</p>
+        </div>
+    
+        <div class="settings">
+            <button id="playPause" type="button">Start</button>
+        </div>
+
+    </div>
+    
+
+    
+</body>
+
+<script>
+var play = true;
+
+function startTimer(duration, display) {
+
+    return new Promise(function(resolve, reject) {
+        var timer = duration, minutes, seconds;
+        
+    setInterval(function () {
+        if (play){
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = 0;
+                resolve("timer ended");
+            }
+        }
+        
+    }, 1000);
+                
+    
+    });
+    
+}
+
+var playPauseButton = document.getElementById("playPause");
+
+playPauseButton.onclick = function() {
+    if (playPauseButton.innerText == "Start"){
+        play = true;
+        playPauseButton.innerText = "Pause"
+        display();
+    }
+    else if (playPauseButton.innerText == "Play"){
+        play = true;
+        playPauseButton.innerText = "Pause";
+    }
+    else if (playPauseButton.innerText == "Pause"){
+        play = false;
+        playPauseButton.innerText = "Play";
+    }
+
+}
+    
+async function display() {
+    var firstTime = 60 * 25; //25 mins
+    var display = document.querySelector('#countdown');
+    await startTimer(firstTime, display);
+
+
+    var five = 60*5; // 5 mins
+    await startTimer(five, display);
+
+}
+
+</script>
+</html>
