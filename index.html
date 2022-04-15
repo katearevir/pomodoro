@@ -16,7 +16,7 @@
     </audio>
     
     <h1>Pomodoro</h1>
-    <span style="font-size: 30px">Work Time!</span>
+    <span id="whichTime" style="font-size: 30px">Work Time!</span>
     <div class="flex-container">
 
         <div class="timer">
@@ -25,9 +25,9 @@
         </div>
     
         <div class="settings">
-            <button id="playPause" type="button">Start</button>
+            <button id="playPause" type="button" style="cursor:pointer">Start</button>
             <br>
-            <button id="restart" type="button">Restart</button>
+            <button id="restart" type="button" style="cursor:pointer">Restart</button>
         </div>
 
         <div class="bear">
@@ -50,6 +50,7 @@ var restart = false;
 var restartButton = document.getElementById("restart");
 var sound = document.getElementById("sound");
 sound.volume = 0.05;
+var iter = 0;
 
 function startTimer(duration, display) {
 
@@ -109,23 +110,26 @@ restartButton.onclick = function(){
     playPauseButton.innerText = "Start";
     restart = true;
 }
-    
+
+//var whichTimeText = document.getElementById("whichTime");
 async function display() {
     var display = document.querySelector('#countdown');
+    console.log("Hi");
 
     while(!restart){
-        if (!restart)
-        {
-        var firstTime = 60 * 25; //25 mins
-        await startTimer(firstTime, display);
-        console.log("first timer" + restart)
-        if (!restart)
-        {
-            console.log("second timer" + restart)
-            var five = 60*5; // 5 mins
-            await startTimer(five, display);
+        if (!restart && (iter % 4) !== 0 || iter === 0){
+            var workTime = 60 * 25; //25 mins
+            await startTimer(workTime, display);
+            if (!restart){
+                var shortBreak = 60*5; // 5 mins
+                await startTimer(shortBreak, display);
+            }
+            iter++;
         }
-            
+        else if(!restart && (iter % 4) === 0){
+            var longBreak = 60*15; // 15 mins
+            await startTimer(longBreak, display);
+            iter++;
         }
     }
     
