@@ -9,6 +9,11 @@
     <title>Pomodoro</title>
 </head>
 <body>
+
+    <audio id="sound">
+        <source src="Melody 1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     
     <h1>Pomodoro</h1>
     <span style="font-size: 30px">Work Time!</span>
@@ -43,6 +48,8 @@ var play = true;
 var restart = false;
 
 var restartButton = document.getElementById("restart");
+var sound = document.getElementById("sound");
+sound.volume = 0.05;
 
 function startTimer(duration, display) {
 
@@ -60,6 +67,8 @@ function startTimer(duration, display) {
             display.textContent = minutes + ":" + seconds;
             
             if (--timer < 0) {
+                sound.play();
+                clearInterval(inter);
                 resolve("timer ended");
             }
             if (restart){
@@ -103,8 +112,10 @@ restartButton.onclick = function(){
     
 async function display() {
     var display = document.querySelector('#countdown');
-    if (!restart)
-    {
+
+    while(!restart){
+        if (!restart)
+        {
         var firstTime = 60 * 25; //25 mins
         await startTimer(firstTime, display);
         console.log("first timer" + restart)
@@ -115,7 +126,9 @@ async function display() {
             await startTimer(five, display);
         }
             
+        }
     }
+    
 
     
     
