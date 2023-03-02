@@ -1,4 +1,4 @@
 # Pomodoro Technique
 
-View the website on Heroku!
-<br> https://pomodoro-kr.herokuapp.com/
+View the website on Render!
+<br> https://pomodoro-kr.onrender.com
