@@ -36,7 +36,8 @@
         </div>
 
         <div class="playlist">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/VMAPTo7RVCo?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            <iframe id="playlistiframe" width="500" height="300" src="https://www.youtube.com/embed/VMAPTo7RVCo?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            <input type="url" id="vidurl" placeholder="Enter a YouTube URL (https://www.youtube.com/...)">
         </div>
     </div>
     
@@ -145,5 +146,39 @@ async function display() {
 
 }
 
+</script>
+
+<!--Playlist-->
+<script>
+    // Get the input field
+var input = document.getElementById("vidurl");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+/*
+    var iframe = document.getElementById("playlistiframe");
+    iframe.src = input.value;
+*/
+    //remove watch?v=
+    const removeWatch = (input.value).replace('watch?v=','');
+    
+    //split url
+    const splitURL = removeWatch.split("/");
+
+    //insert embed/
+    splitURL.splice(3, 0, 'embed');
+
+    console.log(splitURL);
+
+    //rejoin
+    const embedURL = splitURL.join("/")
+    
+    var iframe = document.getElementById("playlistiframe");
+    iframe.src = embedURL+"?autoplay=1";
+
+  }
+});
 </script>
 </html>
